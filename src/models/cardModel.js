@@ -5,32 +5,33 @@ class CardModel {
   async findAll(raridade, ataque) {
     const where = {};
 
-    if(raridade) {
+    if (raridade) {
       where.rarity = raridade;
     }
 
-    if(ataque) {
+    if (ataque) {
       where.attackPoints = {
-        gte: Number(ataque), 
+        gte: Number(ataque),
       };
     }
 
     const cartas = await prisma.card.findMany({
       /* where: {
         rarity: "Ultra Rare",
-      },*/
+      }, */
       /* where: {
         attackPoints: {
           lte: 8000, // Menor ou igual a 8000
         },
       }, */
 
-      where: {
+      /* where: {
         attackPoints: {
-          gte: Number(ataque), 
-      }, 
+          gte: Number(ataque),
+        },
         rarity: raridade,
-      },
+      }, */
+      where,
       orderBy: {
         createdAt: "desc",
       },
